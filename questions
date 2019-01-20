@@ -1,0 +1,9 @@
+From the dataset in Table 7.5 (page 154, SIDS data) from Everitt, solve the following exercises:
+
+1. Extract as much as possible information coming out from the data set using graphical tools as described in Chapter 2 of Everitt.
+
+2. Perform a PCA and interpret the results.
+
+3. Find homogeneous clusters amongst the individuals without considering the variable Group (use hierarchical and k-means methods under two distinct choices of distance methods). Compare the results with the existing groups given by variable "group". Then perform LDA and 
+classify into these groups the following two new observations: 
+Obs1: (110,3320,0.240,39); Obs2: (120,3310,0.298,37).   
