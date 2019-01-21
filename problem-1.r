@@ -47,7 +47,7 @@ dev.off();
 par(fig=c(0,0.7,0,0.7))
 plot(BW,Gesage,lwd=2)
 # add regression line
-abline(lm(BW~Gesage),lwd=2)
+abline(lm(Gesage~BW),lwd=2)
 # add locally weighted regression fit
 lines(lowess(BW,Gesage),lwd=2)
 # set up plotting area for histogram
@@ -78,7 +78,7 @@ dev.off();
 # Create bvbox with robust estimator method (the default one)
 bvbox(cbind(BW,Gesage),xlab="BW",ylab="Gesage")
 # Create bvbox with other (non robust) method
-bvbox(cbind(BW,Gesage),xlab="BW",ylab=" Gesage",method="O")
+bvbox(cbind(BW,Gesage),xlab="BW",ylab="Gesage",method="o")
 
 # Reset plot area
 dev.off();
