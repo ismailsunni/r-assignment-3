@@ -39,7 +39,7 @@ plot(1:5,wss,type="l",xlab="Number of groups",ylab="Within groups sum of squares
 dev.off()
 
 # Complete method
-# Use h=2000 to cut the dendogram (example) and get 2 clusters
+# Use h=2000 to cut the dendrogram (example) and get 2 clusters
 twoComplete<-cutree(hclust(dist(data.components),method="complete"),h=2000)
 as.data.frame(twoComplete) # show the content vertically
 
@@ -49,14 +49,19 @@ data.meanComplete
 data.clusComplete
 
 # Compare to original data
-accuracyComplete<-sum(abs(twoComplete-Group)) / nrow(data)
-accuracyComplete
+accuracyComplete1<-sum(abs(twoComplete-Group)) / nrow(data)
+accuracyComplete1
+# Inverse the value of twoComplete
+twoComplete2 <- (3 - twoComplete)
+twoComplete2
+accuracyComplete2<-sum(abs(twoComplete2-Group)) / nrow(data)
+accuracyComplete2
 
 pairs(data,panel=function(x,y) text(x,y,twoComplete))
 dev.off()
 
 # Average method
-# Use h=1200 to cut the dendogram (example) and get 2 clusters
+# Use h=1200 to cut the dendeogram (example) and get 2 clusters
 twoAverage<-cutree(hclust(dist(data.components),method="average"),h=1200)
 as.data.frame(twoAverage) # show the content vertically
 
@@ -66,8 +71,12 @@ data.meanAverage
 data.clusAverage
 
 # Compare to original data
-accuracyAverage<-sum(abs(twoAverage-Group)) / nrow(data)
-accuracyAverage
+accuracyAverage1<-sum(abs(twoAverage-Group)) / nrow(data)
+accuracyAverage1
+# Inverse the value of twoAverage
+twoAverage2 <- (3 - twoAverage)
+accuracyAverage2<-sum(abs(twoAverage2-Group)) / nrow(data)
+accuracyAverage2
 
 pairs(data,panel=function(x,y) text(x,y,twoAverage))
 dev.off()
@@ -78,8 +87,16 @@ newdata<-rbind(c(110,3320,0.240,39), c(120,3310,0.298,37))
 colnames(newdata) <- colnames(data.components)
 newdata <- data.frame(newdata)
 
+## Complete method
 # linear discriminant analysis
-dis<-lda(twoComplete~HR+BW+Factor68+Gesage,data=data.components,prior=c(0.5,0.5))
+disComplete<-lda(twoComplete~HR+BW+Factor68+Gesage,data=data.components,prior=c(0.5,0.5))
 
 # Predict the cluster for the new data
-predict(dis,newdata = newdata)
+predict(disComplete,newdata = newdata)
+
+## Average method
+# linear discriminant analysis
+disAverage<-lda(twoAverage~HR+BW+Factor68+Gesage,data=data.components,prior=c(0.5,0.5))
+
+# Predict the cluster for the new data
+predict(disAverage,newdata = newdata)
